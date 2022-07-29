@@ -358,13 +358,20 @@ public class NativeAnimatedNodesManager implements EventDispatcherListener {
   @UiThread
   public void connectAnimatedNodes(int parentNodeTag, int childNodeTag) {
     AnimatedNode parentNode = mAnimatedNodes.get(parentNodeTag);
+    AnimatedNode childNode = mAnimatedNodes.get(childNodeTag);
+    if (parentNode == null) {
+      Flog.e("parentNode was null, I wanted to crash.");
+    }
+    
+    if (childNode == null) {
+      Flog.e("childNode was null, I wanted to crash.");
+    }
     if (parentNode == null) {
       throw new JSApplicationIllegalArgumentException(
           "connectAnimatedNodes: Animated node with tag (parent) ["
               + parentNodeTag
               + "] does not exist");
     }
-    AnimatedNode childNode = mAnimatedNodes.get(childNodeTag);
     if (childNode == null) {
       throw new JSApplicationIllegalArgumentException(
           "connectAnimatedNodes: Animated node with tag (child) ["

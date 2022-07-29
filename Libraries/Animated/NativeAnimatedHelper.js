@@ -214,6 +214,13 @@ const API = {
     API.queueOperation(nativeOps.stopListeningToAnimatedNodeValue, tag);
   },
   connectAnimatedNodes: function (parentTag: number, childTag: number): void {
+    if (!parentTag || !childTag) {
+      console.log('connectAnimatedNodes: tag does not exist', {
+        parentTag,
+        childTag,
+      });
+      return;
+    }
     invariant(nativeOps, 'Native animated module is not available');
     API.queueOperation(nativeOps.connectAnimatedNodes, parentTag, childTag);
   },
